@@ -142,10 +142,10 @@ export default function ContactUsPage() {
                       className="mt-1 h-11 w-full rounded-md border border-white/25 bg-white/10 px-3 text-sm text-white outline-none focus:border-violet-300"
                     >
                       <option value="">Choose a service</option>
-                      <option>Web Development</option>
-                      <option>App Development</option>
-                      <option>AI Solutions</option>
-                      <option>Automation</option>
+                      <option className="text-black">Web Development</option>
+                      <option className="text-black">App Development</option>
+                      <option className="text-black">AI Solutions</option>
+                      <option className="text-black">Automation</option>
                     </select>
                   </div>
                   <div className="mt-4">
