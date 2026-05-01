@@ -1,23 +1,16 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { works } from "@/lib/works";
 
 export default function Portfolio() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
   return (
     <section id="work" className="py-24 md:py-40 relative bg-zinc-950">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10" ref={containerRef}>
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-32">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -45,15 +38,11 @@ export default function Portfolio() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 -mt-16">
           {works.map((work, index) => {
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const y = useTransform(scrollYProgress, [0, 1], [0, work.offset * -2]);
-            
             return (
               <motion.div
                 key={work.slug}
-                style={typeof window !== "undefined" && window.innerWidth > 768 ? { y } : {}}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}

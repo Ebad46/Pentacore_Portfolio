@@ -89,7 +89,7 @@ export default function PrivacyHero({
 
           <motion.h1
             variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-6xl font-bold tracking-tighter mb-6 md:mb-8 leading-[1.05] max-w-5xl"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-bold tracking-tighter mb-6 md:mb-8 leading-[1.05] max-w-5xl"
           >
             {titleTop}
             <br />

@@ -124,8 +124,8 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-24 md:py-32 relative bg-zinc-950 border-t border-white/5">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+    <section id="services" className="py-24 md:py-32 relative bg-zinc-950 border-t border-white/5 ">
+      <div className="container mx-auto px-6 max-w-7xl relative z-10 -mt-16">
         <div className="mb-16 md:mb-24 lg:w-2/3">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
