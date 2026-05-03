@@ -57,7 +57,7 @@ export default function Navbar() {
         <Link href="/" className="relative z-10 flex items-center gap-3 group">
           <div className="flex items-center gap-3 rounded-full border border-cyan-300/20 bg-slate-950/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 hover:border-cyan-200/40">
             <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-slate-950/95 ring-1 ring-cyan-300/15 shadow-[0_0_18px_rgba(56,189,248,0.16)]">
-              <Image src="/Logo.png" alt="Pentacore logo" width={44} height={44} className="object-contain" />
+              <Image src="https://images.ebadprince49.workers.dev/Logo.png" alt="Pentacore logo" width={44} height={44} className="object-contain" />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-base font-semibold tracking-[0.24em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500">

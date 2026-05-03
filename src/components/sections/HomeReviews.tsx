@@ -7,35 +7,35 @@ import Image from "next/image";
 const testimonials = [
   {
     name: "Michael Johnson",
-    image: "/michel.png",
+    image: "https://images.ebadprince49.workers.dev/michel.png",
     quote:
       "Pentacore transformed our business with their exceptional web development services. Their team was professional, responsive, and delivered beyond our expectations.",
     stars: 5,
   },
   {
     name: "Sarah Williams",
-    image: "/sara.png",
+    image: "https://images.ebadprince49.workers.dev/sara.png",
     quote:
       "Working with Pentacore was a game-changer for our startup. Their mobile app development expertise helped us launch our product ahead of schedule with outstanding quality.",
     stars: 5,
   },
   {
     name: "David Chen",
-    image: "/david.png",
+    image: "https://images.ebadprince49.workers.dev/david.png",
     quote:
       "The UI/UX design team at Pentacore completely revamped our user interface, resulting in a 40% increase in user engagement. Highly recommended!",
     stars: 5,
   },
   {
     name: "Jennifer Taylor",
-    image: "/jen.png",
+    image: "https://images.ebadprince49.workers.dev/jen.png",
     quote:
       "We've worked with several development agencies in the past, but none have matched the level of expertise and dedication that Pentacore brings to the table.",
     stars: 4,
   },
   {
     name: "Robert Garcia",
-    image: "/robert.png",
+    image: "https://images.ebadprince49.workers.dev/robert.png",
     quote:
       "The AI solutions provided by Pentacore have streamlined our operations and significantly reduced costs. Their team's technical knowledge is truly impressive.",
     stars: 5,

@@ -9,21 +9,21 @@ const services = [
     category: "Web Development",
     date: "Sep 1, 2025",
     title: "The Future of Web Development: Trends to Watch in 2023",
-    image: "/web.jfif",
+    image: "https://images.ebadprince49.workers.dev/web.jfif",
   },
   {
     id: "app",
     category: "Mobile Development",
     date: "Apr 28, 2025",
     title: "Cross-Platform vs Native Mobile Development: Making the Right Choice",
-    image: "/mob.jpeg",
+    image: "https://images.ebadprince49.workers.dev/mob.jpeg",
   },
   {
     id: "ai",
     category: "AI Integration",
     date: "Sep 1, 2025",
     title: "AI-Powered Products: Practical Automation for Modern Businesses",
-    image: "/ai.jfif",
+    image: "https://images.ebadprince49.workers.dev/ai.jfif",
   },
 ];
 

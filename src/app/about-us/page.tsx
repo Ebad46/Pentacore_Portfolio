@@ -68,9 +68,9 @@ export default function AboutPage() {
   const imagePaths = {
     vision:
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
-    engineering: "engi.png",
-    innovation: "inovate.png",
-    iteration: "itrate.png",
+    engineering: "https://images.ebadprince49.workers.dev/engi.png",
+    innovation: "https://images.ebadprince49.workers.dev/inovate.png",
+    iteration: "https://images.ebadprince49.workers.dev/itrate.png",
   };
 
   const stats = [

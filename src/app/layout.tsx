@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   title: "Pentacore Solution",
   description: "Web, App, and AI Solutions for modern businesses.",
   icons: {
-    icon: "/PENTA.png",
-    shortcut: "/PENTA.png",
-    apple: "/PENTA.png",
+    icon: "https://images.ebadprince49.workers.dev/PENTA.png",
+    shortcut: "https://images.ebadprince49.workers.dev/PENTA.png",
+    apple: "https://images.ebadprince49.workers.dev/PENTA.png",
   },
 };
 

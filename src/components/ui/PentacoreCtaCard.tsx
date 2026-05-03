@@ -22,7 +22,7 @@ export default function PentacoreCtaCard({
           <span>Pentac</span>
           <span className="mx-[0.000001em] inline-flex h-[0.75em] w-[0.75em] overflow-hidden  translate-y-[0.1em]">
             <Image
-              src="/Logo.png"
+              src="https://images.ebadprince49.workers.dev/Logo.png"
               alt="o"
               width={96}
               height={96}

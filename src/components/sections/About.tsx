@@ -87,7 +87,7 @@ export default function About() {
                   >
                     <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black/95 rounded-full flex items-center justify-center shadow-[inset_0_0_14px_rgba(255,255,255,0.1)] ring-1 ring-white/20">
                       <Image
-                        src="/Logo.png"
+                        src="https://images.ebadprince49.workers.dev/Logo.png"
                         alt="Pentacore logo"
                         width={64}
                         height={64}
