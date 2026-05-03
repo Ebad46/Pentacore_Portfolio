@@ -53,7 +53,7 @@ export const works: WorkItem[] = [
     overview: "Crafted a high-energy gym web platform that drives member signups and highlights premium training programs.",
     color: "from-emerald-500/30 to-transparent",
     offset: 80,
-    image: "https://images.ebadprince49.workers.dev/gym.png",
+    image: "https://images.ebadprince49.workers.dev/Gym.png",
     alt: "Gym web project preview",
     tech: "Next.js, Sanity, Stripe",
     timeline: "4 Weeks",
