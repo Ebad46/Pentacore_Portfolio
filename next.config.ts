@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "images.ebadprince49.workers.dev",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/photo-*",
+      },
     ],
   },
   // Phone / another PC se LAN IP (e.g. 192.168.x.x) par dev open karo to HMR / _next

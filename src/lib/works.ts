@@ -12,9 +12,25 @@ export type WorkItem = {
   timeline: string;
   impact: string;
   link: string;
+  external?: boolean;
 };
 
 export const works: WorkItem[] = [
+  {
+    slug: "aisaf-store",
+    title: "AISAF Store",
+    category: "E-commerce",
+    desc: "A refined online storefront designed to make discovering and shopping products feel effortless.",
+    overview: "A modern e-commerce experience focused on clear product discovery and a polished shopping journey.",
+    color: "from-zinc-500/30 to-transparent",
+    offset: 0,
+    image: "/aisafhome.png",
+    alt: "AISAF Store homepage",
+    tech: "E-commerce",
+    timeline: "Project delivery",
+    impact: "A streamlined digital shopping experience",
+    link: "https://aisaf.store/",
+  },
   {
     slug: "garage-web",
     title: "Garage Web",
@@ -23,7 +39,7 @@ export const works: WorkItem[] = [
     overview: "Designed a fast garage web experience that helps customers book repairs, view services, and manage appointments.",
     color: "from-sky-500/30 to-transparent",
     offset: 0,
-    image: "https://images.ebadprince49.workers.dev/reddune.png",
+    image: "/reddune.webp",
     alt: "Garage web project preview",
     tech: "Next.js, Tailwind CSS, Node.js",
     timeline: "5 Weeks",
@@ -38,7 +54,7 @@ export const works: WorkItem[] = [
     overview: "Built a scalable commerce system with product administration, secure payments, and a polished customer experience.",
     color: "from-purple-500/30 to-transparent",
     offset: 40,
-    image: "https://images.ebadprince49.workers.dev/ecommerce.png",
+    image: "/ecommerce.webp",
     alt: "Ecommerce backend web project preview",
     tech: "Next.js, Express, PostgreSQL",
     timeline: "7 Weeks",
@@ -53,7 +69,7 @@ export const works: WorkItem[] = [
     overview: "Crafted a high-energy gym web platform that drives member signups and highlights premium training programs.",
     color: "from-emerald-500/30 to-transparent",
     offset: 80,
-    image: "https://images.ebadprince49.workers.dev/Gym.png",
+    image: "/Gym.webp",
     alt: "Gym web project preview",
     tech: "Next.js, Sanity, Stripe",
     timeline: "4 Weeks",

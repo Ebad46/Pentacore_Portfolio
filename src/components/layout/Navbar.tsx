@@ -1,29 +1,61 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import Image from "next/image";
+import { assets } from "@/lib/site";
+
+const subscribeToTheme = (onChange: () => void) => {
+  window.addEventListener("pentacore-theme-change", onChange);
+  return () => window.removeEventListener("pentacore-theme-change", onChange);
+};
+
+const getThemeSnapshot = () =>
+  document.documentElement.dataset.theme === "light";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const lightMode = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    () => false,
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
+  const toggleTheme = () => {
+    const nextTheme = lightMode ? "dark" : "light";
+    if (nextTheme === "light") {
+      document.documentElement.dataset.theme = "light";
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    window.localStorage.setItem("pentacore-theme", nextTheme);
+    window.dispatchEvent(new Event("pentacore-theme-change"));
+  };
+
   useEffect(() => {
+    let frame = 0;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        frame = 0;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About us", href: "/about-us" },
-    // { name: "Process", href: "/#process" },
     { name: "Contact Us", href: "/contact-us" },
   ];
 
@@ -55,26 +87,33 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
         <Link href="/" className="relative z-10 flex items-center gap-3 group">
-          <div className="flex items-center gap-3 rounded-full border border-cyan-300/20 bg-slate-950/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 hover:border-cyan-200/40">
-            <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-slate-950/95 ring-1 ring-cyan-300/15 shadow-[0_0_18px_rgba(56,189,248,0.16)]">
-              <Image src="https://images.ebadprince49.workers.dev/Logo.png" alt="Pentacore logo" width={44} height={44} className="object-contain" />
+          <div className="navbar-brand-shell flex items-center gap-3 rounded-full border border-cyan-300/20 bg-slate-950/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 hover:border-cyan-200/40">
+            <div className="navbar-brand-icon relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl bg-slate-950/95 ring-1 ring-cyan-300/15 shadow-[0_0_18px_rgba(56,189,248,0.16)]">
+              <Image
+                src={assets.logo}
+                alt="Pentacore logo"
+                width={44}
+                height={44}
+                fetchPriority="high"
+                sizes="44px"
+                className="object-contain"
+              />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-base font-semibold tracking-[0.24em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500">
                 PENTACORE
               </span>
-              <span className="text-[10px] uppercase tracking-[0.32em] text-slate-200/70">
+              <span className="navbar-brand-subtitle text-[10px] uppercase tracking-[0.32em] text-slate-200/70">
                 SOLUTION
               </span>
             </div>
           </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
           <Link
             href="/"
-            className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+            className="text-sm font-medium text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
           >
             Home
           </Link>
@@ -86,7 +125,9 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setServicesOpen((prev) => !prev)}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors flex items-center gap-1"
+              aria-expanded={servicesOpen}
+              aria-haspopup="true"
+              className="text-sm font-medium text-white/70 hover:text-white transition-colors flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
             >
               Services
               <span className={`text-xs transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}>▾</span>
@@ -99,7 +140,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-1/2 top-full mt-4 w-[980px] max-w-[92vw] -translate-x-1/2 rounded-2xl border border-cyan-400/20 bg-[#101b30]/95 backdrop-blur-md shadow-[0_22px_70px_rgba(0,0,0,0.55)] overflow-hidden"
+                  className="navbar-dropdown absolute left-1/2 top-full mt-4 w-[980px] max-w-[92vw] -translate-x-1/2 rounded-2xl border border-cyan-400/20 bg-[#101b30]/95 backdrop-blur-md shadow-[0_22px_70px_rgba(0,0,0,0.55)] overflow-hidden"
                 >
                   <div className="grid grid-cols-4 gap-10 p-7 pb-8">
                     {servicesGroups.map((group) => (
@@ -116,20 +157,13 @@ export default function Navbar() {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-cyan-400/15 px-7 py-5 bg-[#0f1a2d]/90">
+                  <div className="navbar-dropdown-footer flex items-center justify-between border-t border-cyan-400/15 px-7 py-5 bg-[#0f1a2d]/90">
                     <div>
                       <h4 className="text-4xl font-bold tracking-tight text-white">OUR OFFERINGS</h4>
                       <p className="mt-2 text-white/75 text-lg">
                         From backend systems to mobile apps and AI automations — we design, build, and optimize modern software tailored for your business goals.
                       </p>
                     </div>
-                    {/* <Link
-                      href="/"
-                      className="shrink-0 ml-8 px-8 py-3 rounded-full bg-cyan-400 text-[#0a1426] font-bold text-lg hover:bg-cyan-300 transition-colors"
-                      onClick={() => setServicesOpen(false)}
-                    >
-                      Get in Touch
-                    </Link> */}
                   </div>
                 </motion.div>
               )}
@@ -140,43 +174,69 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+              className="text-sm font-medium text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
             >
               {link.name}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            type="button"
+            className="theme-toggle"
+            aria-label={lightMode ? "Switch to dark mode" : "Switch to light mode"}
+            title={lightMode ? "Switch to dark mode" : "Switch to light mode"}
+            aria-pressed={lightMode}
+            onClick={toggleTheme}
+          >
+            {lightMode ? <Moon aria-hidden="true" size={18} /> : <Sun aria-hidden="true" size={18} />}
+          </button>
           <Link
             href="/contact-us"
-            className="flex items-center gap-3 rounded-full border border-cyan-500/60  bg-slate-950/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 hover:border-cyan-200/40 text-sm font-semibold text-base font-semibold tracking-[0.24em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500"
+            className="navbar-discuss-link flex items-center gap-3 rounded-full border border-cyan-500/60 bg-slate-950/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 hover:border-cyan-200/40 text-sm font-semibold tracking-[0.24em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
           >
-            LET'S DISCUSS
+            LET&apos;S DISCUSS
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden relative z-10 p-2 text-white/80 hover:text-white"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            type="button"
+            className="theme-toggle"
+            aria-label={lightMode ? "Switch to dark mode" : "Switch to light mode"}
+            title={lightMode ? "Switch to dark mode" : "Switch to light mode"}
+            aria-pressed={lightMode}
+            onClick={toggleTheme}
+          >
+            {lightMode ? <Moon aria-hidden="true" size={18} /> : <Sun aria-hidden="true" size={18} />}
+          </button>
+          <button
+            type="button"
+            className="relative z-10 p-2 text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Nav Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-zinc-950 border-b border-white/10 p-6 md:hidden flex flex-col gap-6"
+            className="mobile-navigation-panel absolute top-full left-0 right-0 bg-zinc-950 border-b border-white/10 p-6 md:hidden flex flex-col gap-6"
           >
             <button
               type="button"
               className="text-lg font-medium text-white/80 hover:text-white text-left"
+              aria-expanded={mobileServicesOpen}
               onClick={() => setMobileServicesOpen((prev) => !prev)}
             >
               <span className="flex items-center justify-between">
@@ -215,7 +275,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/#contact"
+              href="/contact-us"
               className="w-full text-center px-5 py-3 bg-white text-black font-semibold rounded-lg text-sm"
               onClick={() => {
                 setMobileMenuOpen(false);

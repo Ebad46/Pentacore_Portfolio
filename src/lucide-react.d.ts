@@ -14,9 +14,17 @@ declare module "lucide-react" {
   export const ArrowRight: LucideIcon;
   export const ArrowUpRight: LucideIcon;
   export const BrainCircuit: LucideIcon;
+  export const Blocks: LucideIcon;
+  export const Compass: LucideIcon;
   export const Globe: LucideIcon;
+  export const Layers3: LucideIcon;
+  export const LifeBuoy: LucideIcon;
   export const Menu: LucideIcon;
+  export const MessageCircleMore: LucideIcon;
   export const Search: LucideIcon;
+  export const ShieldCheck: LucideIcon;
   export const Smartphone: LucideIcon;
+  export const Sun: LucideIcon;
+  export const Moon: LucideIcon;
   export const X: LucideIcon;
 }

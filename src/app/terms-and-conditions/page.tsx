@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import CTA from "@/components/sections/CTA";
 import PrivacyHero from "@/components/sections/PrivacyHero";
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions",
+  description: "Review the terms that apply when using Pentacore Solution's website and services.",
+  alternates: { canonical: "/terms-and-conditions" },
+};
 
 export default function TermsAndConditionsPage() {
   return (
@@ -12,7 +19,7 @@ export default function TermsAndConditionsPage() {
             <h2 className="text-3xl md:text-4xl font-semibold text-white">Terms and Conditions</h2>
             <p className="mt-2 text-white/60">Effective Date: August 2025</p>
             <p className="mt-4 leading-relaxed">
-              Welcome to Pentacore Solution ("Company," "we," "our," or "us"). By accessing or using
+              Welcome to Pentacore Solution . By accessing or using
               our website and services, you agree to these Terms of Use. If you do not agree, please do
               not use our website or services.
             </p>
@@ -67,7 +74,7 @@ export default function TermsAndConditionsPage() {
           <div>
             <h3 className="text-xl font-semibold text-white">5. Disclaimers</h3>
             <p className="mt-3 leading-relaxed">
-              Our website and services are provided on an "as is" basis without warranties of any kind.
+              Our website and services are provided on an &quot;as is&quot; basis without warranties of any kind.
               While we strive to deliver high-quality solutions, we do not guarantee that our website or
               services will be uninterrupted, error-free, or completely secure.
             </p>
@@ -132,7 +139,7 @@ export default function TermsAndConditionsPage() {
                     </svg>
                   </span>
                   <p className="leading-relaxed">
-                    <span className="text-white font-medium">Phone: </span>+92 3345226644
+                    <span className="text-white font-medium">Phone: </span>+92 3342238324
                   </p>
                 </li>
                 <li className="flex items-center gap-3">

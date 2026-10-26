@@ -1,76 +1,24 @@
- "use client";
+ import type { Metadata } from "next";
+ import Image from "next/image";
+ import PrivacyHero from "@/components/sections/PrivacyHero";
+ import CTA from "@/components/sections/CTA";
+ import CountUp from "@/components/ui/CountUp";
+ import HomeReviews from "@/components/sections/HomeReviews";
+ import { assets } from "@/lib/site";
 
-import { useEffect, useRef, useState } from "react";
-import PrivacyHero from "@/components/sections/PrivacyHero";
-import CTA from "@/components/sections/CTA";
-import HomeReviews from "@/components/sections/HomeReviews";
+ export const metadata: Metadata = {
+   title: "About Us",
+   description:
+     "Learn about Pentacore Solution and our approach to building responsive websites, mobile apps, and backend systems.",
+   alternates: { canonical: "/about-us" },
+ };
 
-function CountUp({
-  end,
-  suffix = "",
-  duration = 1400,
-}: {
-  end: number;
-  suffix?: string;
-  duration?: number;
-}) {
-  const [value, setValue] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node || hasStarted) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasStarted(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [hasStarted]);
-
-  useEffect(() => {
-    if (!hasStarted) return;
-
-    let startTime: number | null = null;
-    let frameId = 0;
-
-    const step = (time: number) => {
-      if (startTime === null) startTime = time;
-      const progress = Math.min((time - startTime) / duration, 1);
-      setValue(Math.round(end * progress));
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(step);
-      }
-    };
-
-    frameId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frameId);
-  }, [hasStarted, end, duration]);
-
-  return (
-    <span ref={ref}>
-      {value.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
-export default function AboutPage() {
-  const imagePaths = {
-    vision:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
-    engineering: "https://images.ebadprince49.workers.dev/engi.png",
-    innovation: "https://images.ebadprince49.workers.dev/inovate.png",
-    iteration: "https://images.ebadprince49.workers.dev/itrate.png",
+ export default function AboutPage() {
+   const imagePaths = {
+     vision: assets.vision,
+     engineering: assets.engineering,
+     innovation: assets.innovation,
+     iteration: assets.iteration,
   };
 
   const stats = [
@@ -91,9 +39,9 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#1d4ed833,transparent_55%)]" />
         <div className="container relative z-10 mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-5xl text-center">
-            <h1 className="mt-5 text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            <h2 className="mt-5 text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Building polished, scalable products with modern frontend precision.
-            </h1>
+            </h2>
             <div className="mx-auto mt-6 max-w-4xl text-base leading-relaxed text-white/70 sm:text-lg md:text-xl">
               <p>
                 We build responsive websites, scalable mobile apps, and robust backend systems that reflect your bold vision and earn customer trust.
@@ -167,10 +115,14 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <div className="rounded-[28px] border border-cyan-300/40 bg-white/5 p-3">
-                  <img
+                <div className="relative rounded-[28px] border border-cyan-300/40 bg-white/5 p-3">
+                  <Image
                     src={imagePaths.vision}
                     alt="Vision to impact"
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    loading="lazy"
                     className="h-full min-h-[280px] w-full rounded-2xl border border-dashed border-cyan-300/35 object-cover"
                   />
                 </div>
@@ -180,7 +132,7 @@ export default function AboutPage() {
 
           <div className="mt-10">
             <div className="flex items-center justify-between">
-              <h1 className="text-4xl font-bold text-cyan-400">What We Believe In</h1>
+              <h2 className="text-4xl font-bold text-cyan-400">What We Believe In</h2>
             </div>
 
              <div className="mt-6 w-full px-4 sm:px-6 lg:px-0">
@@ -192,9 +144,13 @@ export default function AboutPage() {
         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-cyan-300/30 bg-[#061327] shadow-[0_12px_28px_rgba(0,0,0,0.45)] sm:shadow-[0_16px_38px_rgba(0,0,0,0.5)]">
           {/* Image Section */}
           <div className="flex h-48 sm:h-64 lg:h-74 items-center justify-center bg-gradient-to-br from-[#5e73d7] via-[#4f87d1] to-[#35bfd5]">
-            <img
+            <Image
               src={imagePaths.engineering}
               alt="Best-in-class engineering"
+              width={300}
+              height={300}
+              sizes="(max-width: 640px) 160px, (max-width: 1024px) 192px, 216px"
+              loading="lazy"
               className="h-40 w-40 sm:h-48 sm:w-48 lg:h-54 lg:w-54 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.45)]"
             />
           </div>
@@ -223,9 +179,13 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 sm:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr] min-h-auto sm:min-h-[106px] gap-0">
               {/* Image Container */}
               <div className="flex h-40 sm:h-auto sm:min-h-[106px] items-center justify-center bg-gradient-to-br from-[#59d6c8] to-[#4ca8c0]">
-                <img
+                <Image
                   src={imagePaths.innovation}
                   alt="Innovation with purpose"
+                  width={300}
+                  height={300}
+                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 160px, 208px"
+                  loading="lazy"
                   className="h-32 w-32 sm:h-40 sm:w-40 lg:h-52 lg:w-52 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"
                 />
               </div>
@@ -252,9 +212,13 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 sm:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr] min-h-auto sm:min-h-[106px] gap-0">
               {/* Image Container */}
               <div className="flex h-40 sm:h-auto sm:min-h-[106px] items-center justify-center bg-gradient-to-br from-[#5f74d9] to-[#4a95d1]">
-                <img
+                <Image
                   src={imagePaths.iteration}
                   alt="Iteration always"
+                  width={300}
+                  height={300}
+                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 160px, 208px"
+                  loading="lazy"
                   className="h-32 w-32 sm:h-40 sm:w-40 lg:h-52 lg:w-52 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"
                 />
               </div>

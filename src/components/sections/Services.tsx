@@ -1,29 +1,49 @@
-"use client";
-
-import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 
 const services = [
   {
     id: "web",
-    category: "Web Development",
-    date: "Sep 1, 2025",
-    title: "The Future of Web Development: Trends to Watch in 2023",
-    image: "https://images.ebadprince49.workers.dev/web.jfif",
+    badge: "Popular",
+    title: "Web Development",
+    description:
+      "Custom, high-performance websites built with modern technologies. Fully responsive, SEO-friendly, and conversion-focused.",
+    price: "$899",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85",
+    hoverImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85",
+    imageAlt: "Modern website analytics dashboard displayed on a laptop",
   },
   {
     id: "app",
-    category: "Mobile Development",
-    date: "Apr 28, 2025",
-    title: "Cross-Platform vs Native Mobile Development: Making the Right Choice",
-    image: "https://images.ebadprince49.workers.dev/mob.jpeg",
+    badge: "Trending",
+    title: "App Development",
+    description:
+      "Native and cross-platform mobile applications for iOS & Android. Beautiful UI, smooth performance, and scalable architecture.",
+    price: "$1,499",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=85",
+    hoverImage: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85",
+    imageAlt: "Smartphone displaying a polished mobile application interface",
   },
   {
-    id: "ai",
-    category: "AI Integration",
-    date: "Sep 1, 2025",
-    title: "AI-Powered Products: Practical Automation for Modern Businesses",
-    image: "https://images.ebadprince49.workers.dev/ai.jfif",
+    id: "automation",
+    badge: "New",
+    title: "AI Automation",
+    description:
+      "Intelligent automation solutions powered by AI. Streamline workflows, reduce manual work, and boost business efficiency.",
+    price: "$1,299",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=85",
+    hoverImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=85",
+    imageAlt: "Artificial intelligence visualization with connected workflow data",
+  },
+  {
+    id: "integration",
+    badge: "AI",
+    title: "AI Integration",
+    description:
+      "Integrate powerful AI capabilities into your existing products, workflows, and business systems to create smarter experiences.",
+    price: "$999",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=85",
+    hoverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85",
+    imageAlt: "Server infrastructure representing connected business systems",
   },
 ];
 
@@ -105,94 +125,69 @@ const processSteps = [
 ];
 
 export default function Services() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { type: "spring" as const, stiffness: 50, damping: 20 }
-    }
-  };
-
   return (
-    <section id="services" className="py-24 md:py-32 relative bg-zinc-950 border-t border-white/5 ">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10 -mt-16">
-        <div className="mb-16 md:mb-24 lg:w-2/3">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight leading-[1.1]">
-              Built for your next<br className="hidden sm:block" /> stage of growth
-            </h2>
-            <p className="text-lg sm:text-xl text-white/60 font-light max-w-2xl leading-relaxed">
-              Get the legitimacy of a market leader, while staying lean and agile. We bring design, development, and intelligent automation together in one cohesive unit.
-            </p>
-          </motion.div>
+    <section
+      id="services"
+      className="services-section relative border-t border-white/5 bg-zinc-950 py-20 sm:py-24 md:py-28"
+    >
+      <div className="container relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mb-10 max-w-3xl sm:mb-14 md:mb-16">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+            What we do
+          </p>
+          <h2 className="mb-5 text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl">
+            Technology built for what&apos;s next.
+          </h2>
+          <p className="max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+            From digital products to intelligent workflows, we turn ambitious
+            ideas into reliable solutions that move your business forward.
+          </p>
         </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
+        <div className="services-grid grid grid-cols-1 items-stretch md:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => (
-            <motion.div
-              key={service.id}
-              variants={cardVariants}
-              whileHover={{ y: -8 }}
-              className="group"
-            >
-              <article className="overflow-hidden rounded-[22px] border border-white/[0.08] bg-[#070f1f] transition-all duration-300 group-hover:border-white/20 group-hover:shadow-[0_18px_40px_rgba(0,0,0,0.45)]">
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0b1424]">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#061121]/70 via-transparent to-transparent" />
-                </div>
+            <article id={`service-${service.id}`} key={service.id} className="service-card flex h-full flex-col">
+              <div className="service-image relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.imageAlt}
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                  className="service-image-layer service-image-primary object-cover"
+                />
+                <Image
+                  src={service.hoverImage}
+                  alt=""
+                  aria-hidden="true"
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                  className="service-image-layer service-image-secondary object-cover"
+                />
+                <span className="service-badge absolute bottom-4 left-4">
+                  {service.badge}
+                </span>
+              </div>
 
-                <div className="p-5 sm:p-6 md:p-7">
-                  <div className="flex items-center justify-between gap-4 text-white/90">
-                    <p className="flex items-center gap-2 text-base sm:text-lg font-medium">
-                      <span className="h-3 w-3 rounded-full bg-gradient-to-r from-fuchsia-400 to-amber-300" />
-                      {service.category}
-                    </p>
-                    <span className="text-2xl leading-none text-white/55">-</span>
-                    <p className="text-base sm:text-lg font-medium text-white/90">{service.date}</p>
-                  </div>
+              <div className="service-card-content flex flex-1 flex-col">
+                <h3 className="mb-2 text-xl font-semibold tracking-tight text-white sm:text-[1.35rem]">
+                  {service.title}
+                </h3>
+                <p className="service-description text-sm leading-5 text-zinc-400">
+                  {service.description}
+                </p>
 
-                  <h3 className="mt-5 text-[1.95rem] sm:text-[2.15rem] leading-tight tracking-tight font-semibold text-white">
-                    {service.title}
-                  </h3>
+                <div className="mt-auto pt-4">
+                  <p className="text-sm text-zinc-400">
+                    Starting from{" "}
+                    <span className="font-semibold text-white">{service.price}</span>
+                  </p>
                 </div>
-              </article>
-            </motion.div>
+              </div>
+            </article>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-          className="mt-14 md:mt-20 rounded-3xl border border-white/10 bg-gradient-to-br from-[#071226] via-[#07192f] to-[#070d18] p-7 md:p-12 overflow-hidden relative"
-        >
+        <div className="services-process-panel mt-14 md:mt-20 rounded-3xl border border-white/10 bg-gradient-to-br from-[#071226] via-[#07192f] to-[#070d18] p-7 md:p-12 overflow-hidden relative">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute -top-16 left-[10%] w-56 h-56 bg-blue-500/15 blur-[100px]" />
             <div className="absolute top-8 right-[8%] w-56 h-56 bg-emerald-400/10 blur-[100px]" />
@@ -240,21 +235,16 @@ export default function Services() {
                   const mobileLeft = 7 + index * 17.5;
                   const mobileTop = 69 - index * 8.5;
                   return (
-                    <motion.div
+                    <div
                       key={step.id}
                       className="absolute -translate-x-1/2 -translate-y-1/2 text-center"
                       style={{ left: `${mobileLeft}%`, top: `${mobileTop}%` }}
-                      initial={{ opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.06 }}
-                      whileHover={{ y: -3 }}
                     >
                       <div className="mx-auto w-10 h-10 rounded-xl border border-white/20 bg-[#081020]/90 flex items-center justify-center shadow-[0_0_20px_rgba(56,189,248,0.2)]">
                         <span className="text-sky-100">{step.icon}</span>
                       </div>
                       <p className="mt-1.5 text-xs text-white/85 font-medium">{step.label}</p>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
@@ -289,37 +279,32 @@ export default function Services() {
                   filter="url(#lineGlow)"
                   strokeLinecap="round"
                 />
-                <motion.path
+                <path
                   d="M40 290 C238 358, 410 232, 602 126 C788 28, 998 24, 1160 96"
                   stroke="rgba(186,230,253,0.95)"
                   strokeWidth="1.8"
                   fill="none"
                   strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  pathLength={1}
+                  className="process-path-draw"
                 />
               </svg>
 
-              <motion.div
+              <div
                 aria-hidden="true"
-                className="absolute top-[43%] left-[-18%] w-[40%] h-[2px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent blur-[1px]"
-                animate={{ left: ["-18%", "100%"] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: "linear" }}
+                className="process-glow-sweep absolute top-[43%] left-[-18%] w-[40%] h-[2px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent blur-[1px]"
               />
 
               {processSteps.map((step, index) => {
                 return (
-                  <motion.div
+                  <div
                     key={step.id}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 text-center group"
-                    style={{ left: step.left, top: step.top }}
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.45, delay: index * 0.08 }}
-                    whileHover={{ y: -6 }}
+                    className="process-step absolute -translate-x-1/2 -translate-y-1/2 text-center group"
+                    style={{
+                      left: step.left,
+                      top: step.top,
+                      animationDelay: `${index * 0.08}s`,
+                    }}
                   >
                     <div className="mx-auto w-12 h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl border border-white/20 bg-[#081020]/85 backdrop-blur-md flex items-center justify-center shadow-[0_0_30px_rgba(56,189,248,0.2)] group-hover:shadow-[0_0_38px_rgba(52,211,153,0.26)] transition-all duration-300">
                       <span className="text-sky-100 group-hover:text-emerald-200 transition-colors duration-300">{step.icon}</span>
@@ -327,12 +312,12 @@ export default function Services() {
                     <p className="mt-2.5 text-xs lg:text-sm text-white/85 group-hover:text-white transition-colors duration-300 font-medium">
                       {step.label}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

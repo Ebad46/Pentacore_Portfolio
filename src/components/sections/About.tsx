@@ -1,123 +1,236 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
+import Link from "next/link";
 import Image from "next/image";
-import Noise from "@/components/ui/Noise";
+import { assets } from "@/lib/site";
+import CardIndex from "@/components/ui/CardIndex";
+
+const principles = [
+  {
+    title: "Engineering that scales",
+    description:
+      "Thoughtful architecture, reliable integrations, and solutions built around actual business needs.",
+  },
+  {
+    title: "UX with a purpose",
+    description:
+      "Intuitive user journeys, responsive interfaces, and experiences designed around people.",
+  },
+  {
+    title: "Maintainable by design",
+    description:
+      "Reusable components, clear documentation, and structured code that is easier to extend.",
+  },
+  {
+    title: "Security by design",
+    description:
+      "Appropriate access controls, careful credential handling, input validation, and security-conscious development.",
+  },
+  {
+    title: "Clear communication",
+    description:
+      "Visible progress, aligned milestones, honest updates, and clear expectations at every stage.",
+  },
+  {
+    title: "Beyond launch",
+    description:
+      "Deployment support, knowledge transfer, and clearly defined options for ongoing improvements.",
+  },
+];
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const pointerFrameRef = useRef<number | null>(null);
+  const cursorActiveRef = useRef(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isCursorActive, setIsCursorActive] = useState(false);
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      let wasVisible = false;
+      const checkVisibility = () => {
+        const bounds = section.getBoundingClientRect();
+        const isNowVisible = bounds.bottom > 0 && bounds.top < window.innerHeight;
+        if (isNowVisible !== wasVisible) {
+          wasVisible = isNowVisible;
+          setIsVisible(isNowVisible);
+        }
+      };
+
+      checkVisibility();
+      window.addEventListener("scroll", checkVisibility, { passive: true });
+      window.addEventListener("resize", checkVisibility, { passive: true });
+      return () => {
+        window.removeEventListener("scroll", checkVisibility);
+        window.removeEventListener("resize", checkVisibility);
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.01 },
+    );
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !isVisible) {
+      cursorActiveRef.current = false;
+      setIsCursorActive(false);
+      return;
+    }
+    const sectionElement = section;
+
+    let scrollTimer: ReturnType<typeof setTimeout> | undefined;
+    let isScrolling = false;
+
+    function activateCursor(active: boolean) {
+      if (cursorActiveRef.current === active) return;
+      cursorActiveRef.current = active;
+      setIsCursorActive(active);
+    }
+
+    function updateCursor(event: PointerEvent) {
+      if (isScrolling || event.pointerType !== "mouse") return;
+
+      const cursor = cursorRef.current;
+      if (!cursor) return;
+
+      const { clientX, clientY } = event;
+      if (pointerFrameRef.current !== null) {
+        cancelAnimationFrame(pointerFrameRef.current);
+      }
+
+      pointerFrameRef.current = requestAnimationFrame(() => {
+        cursor.style.transform = `translate3d(${clientX}px, ${clientY}px, 0) translate(-50%, -50%)`;
+        pointerFrameRef.current = null;
+      });
+      activateCursor(true);
+    }
+
+    function leaveSection() {
+      activateCursor(false);
+    }
+
+    function handleScroll() {
+      isScrolling = true;
+      sectionElement.removeEventListener("pointermove", updateCursor);
+      activateCursor(false);
+      if (pointerFrameRef.current !== null) {
+        cancelAnimationFrame(pointerFrameRef.current);
+        pointerFrameRef.current = null;
+      }
+      if (scrollTimer) clearTimeout(scrollTimer);
+
+      scrollTimer = setTimeout(() => {
+        isScrolling = false;
+        if (sectionElement.matches(":hover")) {
+          sectionElement.addEventListener("pointermove", updateCursor, {
+            passive: true,
+          });
+        }
+      }, 160);
+    }
+
+    sectionElement.addEventListener("pointermove", updateCursor, { passive: true });
+    sectionElement.addEventListener("pointerleave", leaveSection);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      sectionElement.removeEventListener("pointermove", updateCursor);
+      sectionElement.removeEventListener("pointerleave", leaveSection);
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimer) clearTimeout(scrollTimer);
+      if (pointerFrameRef.current !== null) {
+        cancelAnimationFrame(pointerFrameRef.current);
+        pointerFrameRef.current = null;
+      }
+      cursorActiveRef.current = false;
+    };
+  }, [isVisible]);
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 md:py-40 relative bg-black overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <section
+      ref={sectionRef}
+      id="about"
+      aria-labelledby="about-heading"
+      className={`why-section relative overflow-hidden py-20 sm:py-24 md:py-28${isVisible ? " why-section--revealed" : ""}${isCursorActive ? " why-section--cursor-active" : ""}`}
+    >
+      <div
+        ref={cursorRef}
+        className="why-core-cursor"
+        aria-hidden="true"
+      >
+        <span className="why-core-orbit why-core-orbit-outer" />
+        <span className="why-core-orbit why-core-orbit-inner" />
+        <span className="why-core-center">
+          <Image
+            src={assets.logo}
+            alt=""
+            width={32}
+            height={29}
+            sizes="32px"
+            className="h-6 w-6 object-contain"
+          />
+        </span>
+      </div>
 
-          {/* Left Text Side */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="order-2 lg:order-1"
+      <div className="container relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mb-10 max-w-3xl sm:mb-14 md:mb-16">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+            The Pentacore difference
+          </p>
+          <h2
+            id="about-heading"
+            className="why-heading mb-5 text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 leading-[1.1] tracking-tight">
-              A modern tech firm<br />
-              <span className="text-white/40">for visionary brands</span>
-            </h2>
-            <div className="space-y-6 text-base sm:text-lg text-white/60 font-light leading-relaxed mb-12">
-              <p>
-                We started Pentacore with a clear mandate: to architect high-end digital solutions that actively drive scale without the friction of bloated traditional agencies.
-              </p>
-              <p>
-                By combining bespoke web development, scalable mobile app architectures, and deeply integrated AI automation, we create resilient ecosystems that empower your business from the inside out.
-              </p>
-            </div>
+            Built with purpose. Engineered for what&apos;s next.
+          </h2>
+          <p className="max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+            Great technology isn&apos;t just about launching faster. It&apos;s
+            about creating digital products and systems that remain useful,
+            adaptable, and dependable as your business grows.
+          </p>
+        </div>
 
-            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/10">
-              <motion.div whileHover={{ y: -5 }} transition={{ type: "spring" }}>
-                <h4 className="text-4xl sm:text-5xl font-bold text-white mb-2">50+</h4>
-                <p className="text-xs sm:text-sm text-white/50 uppercase tracking-widest font-medium">Deployments</p>
-              </motion.div>
-              <motion.div whileHover={{ y: -5 }} transition={{ type: "spring" }}>
-                <h4 className="text-4xl sm:text-5xl font-bold text-white mb-2">3x</h4>
-                <p className="text-xs sm:text-sm text-white/50 uppercase tracking-widest font-medium">Average ROI</p>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Right Visual Side - Parallax Graphic */}
-          <motion.div
-            style={{ y: y1 }}
-            className="order-1 lg:order-2 relative w-full h-[400px] sm:h-[500px] lg:h-[600px] perspective-1000"
-          >
-            <div className="w-full h-full rounded-3xl overflow-hidden bg-zinc-950/80 border border-white/10 relative shadow-2xl backdrop-blur-3xl transform preserve-3d group">
-              <Noise />
-              <div className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-blue-600/10 blur-[100px] rounded-full group-hover:bg-purple-600/10 transition-colors duration-1000 z-0 " />
-
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center p-8 sm:p-12">
-
-                {/* Abstract System UI */}
-                <div className="w-full max-w-sm flex justify-between items-center mb-10 opacity-60">
-                  <div className="h-[1px] w-[40%] bg-gradient-to-r from-transparent to-white" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_white] animate-pulse" />
-                  <div className="h-[1px] w-[40%] bg-gradient-to-l from-transparent to-white" />
-                </div>
-
-                {/* Core Object */}
-                <motion.div
-                  className="w-40 h-40 sm:w-56 sm:h-56 rounded-full border border-white/20 flex items-center justify-center relative"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                >
-                  <div className="absolute w-[120%] h-[120%] border border-dashed border-blue-400/20 rounded-full" />
-                  <div className="absolute w-[80%] h-[80%] border border-purple-400/20 rounded-full" style={{ animationDirection: 'reverse' }} />
-
-                  <motion.div
-                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-blue-600/80 to-purple-600/80 flex items-center justify-center relative z-10 shadow-[0_0_36px_rgba(99,102,241,0.5)]"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black/95 rounded-full flex items-center justify-center shadow-[inset_0_0_14px_rgba(255,255,255,0.1)] ring-1 ring-white/20">
-                      <Image
-                        src="https://images.ebadprince49.workers.dev/Logo.png"
-                        alt="Pentacore logo"
-                        width={64}
-                        height={64}
-                        className="w-12 h-12 sm:w-16 sm:h-16 object-contain drop-shadow-[0_0_10px_rgba(125,211,252,0.55)]"
-                        priority
-                      />
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                <div className="w-full max-w-sm flex justify-between items-center mt-10 opacity-60">
-                  <div className="h-[1px] w-[30%] bg-gradient-to-r from-transparent to-white" />
-                  <div className="h-[1px] w-[30%] bg-gradient-to-l from-transparent to-white" />
-                </div>
-              </div>
-            </div>
-
-            {/* Floating parallax badges */}
-            <motion.div
-              style={{ y: y2 }}
-              className="absolute -bottom-8 -left-4 sm:-bottom-10 sm:-left-10 bg-zinc-900 border border-white/10 px-6 py-4 sm:px-8 sm:py-5 rounded-2xl shadow-2xl z-20 backdrop-blur-xl"
+        <div className="why-principles-grid grid grid-cols-1 items-stretch md:grid-cols-2 xl:grid-cols-3">
+          {principles.map(({ title, description }, index) => (
+            <article
+              key={title}
+              className="why-principle-card"
+              style={{ "--reveal-delay": `${index * 80}ms` } as CSSProperties}
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500/10 rounded-full flex items-center justify-center absolute -top-5 -right-5 border border-emerald-500/20">
-                <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
-              </div>
-              <p className="text-xs sm:text-sm font-semibold text-white/80 uppercase tracking-widest mb-1">System Status</p>
-              <p className="text-lg sm:text-xl font-bold text-white">All Systems Nominal</p>
-            </motion.div>
-          </motion.div>
+              <CardIndex index={index} />
+              <h3 className="mb-3 text-xl font-semibold tracking-tight text-white">
+                {title}
+              </h3>
+              <p className="text-sm leading-6 text-[#B5B5BC]">{description}</p>
+            </article>
+          ))}
+        </div>
 
+        <div className="why-cta mt-8 flex flex-col items-start justify-between gap-6 px-6 py-7 sm:flex-row sm:items-center sm:px-8 md:px-10">
+          <div>
+            <h3 className="mb-2 text-xl font-semibold tracking-tight text-white sm:text-2xl">
+              A better way to build your next product.
+            </h3>
+            <p className="text-sm leading-relaxed text-[#B5B5BC] sm:text-base">
+              Let&apos;s discuss your goals, constraints, and the right approach.
+            </p>
+          </div>
+          <Link className="why-cta-link" href="/contact-us#contact-form">
+            Start a project
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </section>

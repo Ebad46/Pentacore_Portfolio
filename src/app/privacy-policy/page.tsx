@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import CTA from "@/components/sections/CTA";
 import PrivacyHero from "@/components/sections/PrivacyHero";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Read how Pentacore Solution handles information collected through its website and services.",
+  alternates: { canonical: "/privacy-policy" },
+};
 
 export default function PrivacyPolicyPage() {
   return (
@@ -12,7 +19,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-3xl md:text-4xl font-semibold text-white">Privacy Policy</h2>
               <p className="mt-2 text-white/60">Effective Date: August 2025</p>
               <p className="mt-4 leading-relaxed">
-                At Pentacore Solution ("Company," "we," "our," or "us"), we value your trust and are
+                At Pentacore Solution , we value your trust and are
                 committed to protecting your privacy. This Privacy Policy explains how we handle
                 information collected through our website and services.
               </p>
@@ -120,7 +127,7 @@ export default function PrivacyPolicyPage() {
               <h3 className="text-xl font-semibold text-white">8. Policy Updates</h3>
               <p className="mt-3 leading-relaxed">
                 We may update this Privacy Policy occasionally. Any changes will be posted on this page
-                with an updated "Effective Date."
+                with an updated &quot;Effective Date.&quot;
               </p>
             </div>
 
@@ -153,7 +160,7 @@ export default function PrivacyPolicyPage() {
                       </svg>
                     </span>
                     <p className="leading-relaxed">
-                      <span className="text-white font-medium">Phone: </span>+92 3345226644
+                      <span className="text-white font-medium">Phone: </span>+92 3342238324
                     </p>
                   </li>
                   <li className="flex items-center gap-3">

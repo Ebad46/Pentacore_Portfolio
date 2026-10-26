@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { assets } from "@/lib/site";
 
 type PentacoreCtaCardProps = {
   title?: string;
@@ -22,10 +23,11 @@ export default function PentacoreCtaCard({
           <span>Pentac</span>
           <span className="mx-[0.000001em] inline-flex h-[0.75em] w-[0.75em] overflow-hidden  translate-y-[0.1em]">
             <Image
-              src="https://images.ebadprince49.workers.dev/Logo.png"
-              alt="o"
+              src={assets.logo}
+              alt=""
               width={96}
-              height={96}
+              height={86}
+              sizes="(max-width: 640px) 56px, (max-width: 1024px) 112px, 200px"
               className="h-full w-full object-contain"
             />
           </span>

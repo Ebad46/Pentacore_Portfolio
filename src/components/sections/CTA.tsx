@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { assets } from "@/lib/site";
 
 export default function CTA() {
   return (
@@ -16,14 +17,15 @@ export default function CTA() {
           aria-hidden="true"
           className="mb-8 pointer-events-none select-none text-center text-[19vw] md:text-[15vw] font-extrabold tracking-tight leading-none"
         >
-          <span className="inline-flex items-center bg-gradient-to-b from-white/[0.22] via-cyan-200/[0.12] to-transparent bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(56,189,248,0.12)]">
+          <span className="contact-brand-watermark inline-flex items-center bg-gradient-to-b from-white/[0.22] via-cyan-200/[0.12] to-transparent bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(56,189,248,0.12)]">
             <span>Pentac</span>
             <span className="mx-[0.000001em] inline-flex h-[0.75em] w-[0.75em] overflow-hidden translate-y-[0.1em]">
               <Image
-                src="https://images.ebadprince49.workers.dev/Logo.png"
-                alt="o"
+                src={assets.logo}
+                alt=""
                 width={96}
-                height={96}
+                height={86}
+                sizes="(max-width: 640px) 56px, (max-width: 1024px) 112px, 200px"
                 className="h-full w-full object-contain"
               />
             </span>

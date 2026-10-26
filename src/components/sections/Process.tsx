@@ -67,8 +67,9 @@ export default function Process() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
-                className="relative group"
+                className="process-step relative group"
               >
+                <span aria-hidden="true" className="process-step-line" />
                 <div className="flex flex-row lg:flex-col items-start gap-6 lg:gap-0">
                   {/* Number Node */}
                   <div className="lg:mb-10 relative">

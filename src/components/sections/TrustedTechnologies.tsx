@@ -1,7 +1,4 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 
 const bg = "#0B0E14";
 const headingColor = "#38bdf8";
@@ -190,79 +187,47 @@ function LogoRow({
   );
 }
 
-const MARQUEE_DURATION_SEC = 42;
-
 export default function TrustedTechnologies() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section
-      className="relative w-full border-y border-white/[0.06]"
+      className="trusted-technologies-section relative w-full border-y border-white/[0.06]"
       style={{ backgroundColor: bg }}
       aria-labelledby="trusted-tech-heading"
     >
       <div className="container mx-auto max-w-6xl px-6 pt-10 text-center sm:pt-12 md:pt-14">
-        <motion.h2
+        <h2
           id="trusted-tech-heading"
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-lg font-semibold leading-snug tracking-tight sm:text-xl md:text-2xl"
           style={{ color: headingColor }}
         >
           Built With Technologies We Trust
-        </motion.h2>
+        </h2>
       </div>
 
-      <div className="relative left-1/2 mt-8 w-screen max-w-[100vw] -translate-x-1/2 sm:mt-10">
+      <div className="relative left-1/2 mt-8 w-screen max-w-[100vw] -translate-x-1/2 overflow-x-hidden sm:mt-10">
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r sm:w-20"
+          className="trusted-tech-fade-left pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r sm:w-20"
           style={{ background: `linear-gradient(to right, ${bg}, transparent)` }}
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l sm:w-20"
+          className="trusted-tech-fade-right pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l sm:w-20"
           style={{ background: `linear-gradient(to left, ${bg}, transparent)` }}
         />
 
         <div className="overflow-hidden py-3 sm:py-4">
-          {reduceMotion ? (
-            <ul className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-10 gap-y-6 px-6 sm:gap-x-12">
-              {logos.map(({ id, label, node }) => (
-                <li key={id} className="flex items-center opacity-95 [&_svg]:shrink-0" aria-label={label}>
-                  {node}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <motion.div
-              className="flex w-max will-change-transform"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                duration: MARQUEE_DURATION_SEC,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              <LogoRow logos={logos} suffix="" />
-              <LogoRow logos={logos} suffix="-dup" ariaHidden />
-            </motion.div>
-          )}
+          <div className="marquee-track">
+            <LogoRow logos={logos} suffix="" />
+            <LogoRow logos={logos} suffix="-dup" ariaHidden />
+          </div>
         </div>
       </div>
 
       <div className="container mx-auto max-w-6xl px-6 pb-10 sm:pb-12 md:pb-14">
         <div className="h-px w-full bg-white/10" />
 
-        <motion.p
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-white/90 sm:mt-8 sm:text-base"
-        >
+        <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-white/90 sm:mt-8 sm:text-base">
           From AI models to full-stack frameworks, we use technologies that are secure, scalable, and trusted by millions.
-        </motion.p>
+        </p>
       </div>
     </section>
   );
