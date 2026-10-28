@@ -111,7 +111,7 @@ export default function Portfolio() {
                 rel={work.external ? "noopener noreferrer" : undefined}
                 className="portfolio-card-link block h-full rounded-[8px] focus-visible:outline-none"
               >
-                <article className="service-card portfolio-card flex h-full flex-col">
+                <article className="site-card service-card portfolio-card flex h-full flex-col">
                   <div className="service-image relative aspect-[4/3] w-full overflow-hidden">
                     <Image
                       src={work.image}

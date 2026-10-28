@@ -67,7 +67,7 @@ export default function ContactForm() {
     <form
       id="contact-form"
       onSubmit={handleSubmit}
-      className="contact-form rounded-2xl border border-white/25 bg-white/[0.08] p-5 shadow-[0_0_40px_rgba(167,139,250,0.28)] backdrop-blur-xl md:p-6"
+      className="site-card contact-form rounded-2xl p-5 shadow-[0_0_40px_rgba(167,139,250,0.28)] md:p-6"
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>

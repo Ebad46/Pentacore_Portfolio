@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -43,11 +42,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={`${space_grotesk.variable} ${space_grotesk.className} antialiased bg-black text-foreground`}>
-        <Script id="theme-initializer" strategy="beforeInteractive">
-          {`if (localStorage.getItem("pentacore-theme") === "light") document.documentElement.dataset.theme = "light";`}
-        </Script>
         <Navbar />
         {children}
         <Footer />

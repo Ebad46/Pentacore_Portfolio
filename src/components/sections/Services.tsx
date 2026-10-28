@@ -9,7 +9,6 @@ const services = [
       "Custom, high-performance websites built with modern technologies. Fully responsive, SEO-friendly, and conversion-focused.",
     price: "$899",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85",
     imageAlt: "Modern website analytics dashboard displayed on a laptop",
   },
   {
@@ -20,7 +19,6 @@ const services = [
       "Native and cross-platform mobile applications for iOS & Android. Beautiful UI, smooth performance, and scalable architecture.",
     price: "$1,499",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85",
     imageAlt: "Smartphone displaying a polished mobile application interface",
   },
   {
@@ -31,7 +29,6 @@ const services = [
       "Intelligent automation solutions powered by AI. Streamline workflows, reduce manual work, and boost business efficiency.",
     price: "$1,299",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=900&q=85",
     imageAlt: "Artificial intelligence visualization with connected workflow data",
   },
   {
@@ -42,7 +39,6 @@ const services = [
       "Integrate powerful AI capabilities into your existing products, workflows, and business systems to create smarter experiences.",
     price: "$999",
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=85",
-    hoverImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85",
     imageAlt: "Server infrastructure representing connected business systems",
   },
 ];
@@ -146,22 +142,16 @@ export default function Services() {
 
         <div className="services-grid grid grid-cols-1 items-stretch md:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => (
-            <article id={`service-${service.id}`} key={service.id} className="service-card flex h-full flex-col">
+            <article id={`service-${service.id}`} key={service.id} className="site-card service-card flex h-full flex-col">
               <div className="service-image relative aspect-[4/3] w-full overflow-hidden">
                 <Image
                   src={service.image}
                   alt={service.imageAlt}
                   fill
                   sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                  className="service-image-layer service-image-primary object-cover"
-                />
-                <Image
-                  src={service.hoverImage}
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                  className="service-image-layer service-image-secondary object-cover"
+                  loading="lazy"
+                  quality={72}
+                  className="object-cover"
                 />
                 <span className="service-badge absolute bottom-4 left-4">
                   {service.badge}
@@ -187,7 +177,7 @@ export default function Services() {
           ))}
         </div>
 
-        <div className="services-process-panel mt-14 md:mt-20 rounded-3xl border border-white/10 bg-gradient-to-br from-[#071226] via-[#07192f] to-[#070d18] p-7 md:p-12 overflow-hidden relative">
+        <div className="site-card services-process-panel mt-14 md:mt-20 rounded-3xl p-7 md:p-12 overflow-hidden relative">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute -top-16 left-[10%] w-56 h-56 bg-blue-500/15 blur-[100px]" />
             <div className="absolute top-8 right-[8%] w-56 h-56 bg-emerald-400/10 blur-[100px]" />
@@ -228,6 +218,8 @@ export default function Services() {
                     strokeWidth="3"
                     fill="none"
                     strokeLinecap="round"
+                    pathLength={1}
+                    className="process-path-draw"
                   />
                 </svg>
 
@@ -237,8 +229,12 @@ export default function Services() {
                   return (
                     <div
                       key={step.id}
-                      className="absolute -translate-x-1/2 -translate-y-1/2 text-center"
-                      style={{ left: `${mobileLeft}%`, top: `${mobileTop}%` }}
+                      className="process-step absolute -translate-x-1/2 -translate-y-1/2 text-center"
+                      style={{
+                        left: `${mobileLeft}%`,
+                        top: `${mobileTop}%`,
+                        animationDelay: `${index * 0.08}s`,
+                      }}
                     >
                       <div className="mx-auto w-10 h-10 rounded-xl border border-white/20 bg-[#081020]/90 flex items-center justify-center shadow-[0_0_20px_rgba(56,189,248,0.2)]">
                         <span className="text-sky-100">{step.icon}</span>

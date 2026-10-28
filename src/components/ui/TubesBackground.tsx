@@ -37,8 +37,10 @@ export default function TubesBackground({
     let timeoutId = 0;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-    if (prefersReducedMotion || hasCoarsePointer) return;
+    const isTouchDevice = window.matchMedia("(pointer: coarse), (hover: none)").matches;
+    const isSmallViewport = window.innerWidth < 768;
+
+    if (prefersReducedMotion || isTouchDevice || isSmallViewport) return;
 
     const initTubes = async () => {
       if (!mounted || !canvasRef.current || tubesRef.current) return;
@@ -117,7 +119,7 @@ export default function TubesBackground({
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full block"
-        style={{ touchAction: "none" }}
+        style={{ touchAction: "pan-y pinch-zoom" }}
       />
     </div>
   );

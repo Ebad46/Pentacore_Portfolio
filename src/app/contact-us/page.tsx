@@ -45,9 +45,7 @@ export default function ContactUsPage() {
 
           <div className="mt-8">
             <CTA />
-            <div className="rounded-2xl border border-white/10 bg-[#0b0e14]">
-              <HomeReviews />
-            </div>
+            <HomeReviews />
           </div>
         </div>
       </section>

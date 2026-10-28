@@ -87,7 +87,7 @@ export default function HomeReviews() {
             </button>
           </div>
 
-          <div className="w-full text-left rounded-2xl border border-white/[0.08] bg-[#0f141c]/90 p-5 sm:p-8 md:p-10 shadow-xl shadow-black/35 transition hover:border-white/[0.16]">
+          <div className="site-card w-full text-left rounded-2xl p-5 sm:p-8 md:p-10">
             <div className="relative min-h-[190px] sm:min-h-[150px]" aria-live="polite">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.blockquote

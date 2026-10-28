@@ -67,7 +67,7 @@ export default function BusinessChallenges() {
           {challenges.map((challenge, index) => (
             <article
               key={challenge.id}
-              className="challenge-card flex h-full flex-col"
+              className="site-card challenge-card flex h-full flex-col"
             >
               <CardIndex index={index} />
               <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-zinc-400">
@@ -95,13 +95,13 @@ export default function BusinessChallenges() {
           ))}
         </div>
 
-        <figure className="challenges-video mt-8">
+        <figure className="site-card challenges-video mt-8">
           <video
             aria-label="A video about the challenges of manual business tasks"
             className="block aspect-video w-full"
             controls
             playsInline
-            preload="metadata"
+            preload="none"
           >
             <source
               src="/Are_you_still_drowning_in_manual_tasks_Youre_not_a%20(online-video-cutter.com).mp4"
@@ -111,7 +111,7 @@ export default function BusinessChallenges() {
           </video>
         </figure>
 
-        <div className="challenges-cta mt-8 flex flex-col items-start justify-between gap-5 px-6 py-6 sm:flex-row sm:items-center sm:px-8">
+        <div className="site-card challenges-cta mt-8 flex flex-col items-start justify-between gap-5 px-6 py-6 sm:flex-row sm:items-center sm:px-8">
           <p className="text-base font-medium leading-relaxed text-white sm:text-lg">
             Not sure which solution fits your business? Let&apos;s discuss your
             challenge.

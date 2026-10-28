@@ -73,7 +73,7 @@ export default async function CaseStudy({ params }: CaseStudyPageProps) {
           </p>
         </div>
 
-        <div className="case-study-visual relative mb-16 aspect-video w-full overflow-hidden rounded-3xl border border-white/10 bg-zinc-900 shadow-2xl">
+        <div className="site-card case-study-visual relative mb-16 aspect-video w-full overflow-hidden rounded-3xl shadow-2xl">
           <Image
             src={work.image}
             alt={work.alt}
@@ -95,7 +95,7 @@ export default async function CaseStudy({ params }: CaseStudyPageProps) {
             <p className="leading-relaxed text-white/70">{work.desc}</p>
           </div>
 
-          <div className="h-fit rounded-2xl border border-white/10 bg-zinc-950 p-8">
+          <div className="site-card h-fit rounded-2xl p-8">
             <h2 className="mb-6 text-lg font-bold tracking-tight">Deployment Stats</h2>
             <ul className="space-y-6">
               <li>

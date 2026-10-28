@@ -35,7 +35,7 @@ export default function PentacoreCtaCard({
         </span>
       </div>
 
-      <div className="relative z-30 rounded-[2rem] overflow-hidden border border-white/20 bg-gradient-to-r from-indigo-500/80 via-sky-500/70 to-emerald-400/70 p-8 md:p-12">
+      <div className="site-card relative z-30 rounded-[2rem] overflow-hidden p-8 md:p-12">
         <div className="pointer-events-none absolute inset-0 bg-black/15" />
         <div className="relative z-10">
           <h2 className="text-3xl md:text-5xl font-bold leading-tight text-white max-w-3xl">

@@ -113,7 +113,7 @@ export default function TermsAndConditionsPage() {
             <p className="mt-3 leading-relaxed">
               For any questions or concerns about these Terms, you can reach us at:
             </p>
-            <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6">
+            <div className="site-card mt-4 rounded-2xl p-5 md:p-6">
               <ul className="space-y-4">
                 <li className="flex items-center gap-3">
                   <span className="h-10 w-10 rounded-full border border-white/20 flex items-center justify-center text-cyan-300">

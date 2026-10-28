@@ -1,41 +1,17 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { assets } from "@/lib/site";
 
-const subscribeToTheme = (onChange: () => void) => {
-  window.addEventListener("pentacore-theme-change", onChange);
-  return () => window.removeEventListener("pentacore-theme-change", onChange);
-};
-
-const getThemeSnapshot = () =>
-  document.documentElement.dataset.theme === "light";
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const lightMode = useSyncExternalStore(
-    subscribeToTheme,
-    getThemeSnapshot,
-    () => false,
-  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-
-  const toggleTheme = () => {
-    const nextTheme = lightMode ? "dark" : "light";
-    if (nextTheme === "light") {
-      document.documentElement.dataset.theme = "light";
-    } else {
-      delete document.documentElement.dataset.theme;
-    }
-    window.localStorage.setItem("pentacore-theme", nextTheme);
-    window.dispatchEvent(new Event("pentacore-theme-change"));
-  };
 
   useEffect(() => {
     let frame = 0;
@@ -182,16 +158,6 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <button
-            type="button"
-            className="theme-toggle"
-            aria-label={lightMode ? "Switch to dark mode" : "Switch to light mode"}
-            title={lightMode ? "Switch to dark mode" : "Switch to light mode"}
-            aria-pressed={lightMode}
-            onClick={toggleTheme}
-          >
-            {lightMode ? <Moon aria-hidden="true" size={18} /> : <Sun aria-hidden="true" size={18} />}
-          </button>
           <Link
             href="/contact-us"
             className="navbar-discuss-link flex items-center gap-3 rounded-full border border-cyan-500/60 bg-slate-950/90 px-3 py-2 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition-all duration-300 hover:border-cyan-200/40 text-sm font-semibold tracking-[0.24em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
@@ -201,16 +167,6 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
-          <button
-            type="button"
-            className="theme-toggle"
-            aria-label={lightMode ? "Switch to dark mode" : "Switch to light mode"}
-            title={lightMode ? "Switch to dark mode" : "Switch to light mode"}
-            aria-pressed={lightMode}
-            onClick={toggleTheme}
-          >
-            {lightMode ? <Moon aria-hidden="true" size={18} /> : <Sun aria-hidden="true" size={18} />}
-          </button>
           <button
             type="button"
             className="relative z-10 p-2 text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"

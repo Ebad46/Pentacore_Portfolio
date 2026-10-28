@@ -32,6 +32,21 @@ export const works: WorkItem[] = [
     link: "https://aisaf.store/",
   },
   {
+    slug: "universal-engineering-works",
+    title: "Universal Engineering Works",
+    category: "Industrial & Engineering",
+    desc: "A strong industrial brand experience built to showcase services, credibility, and customer trust with clarity.",
+    overview: "Designed a polished engineering website that communicates industrial expertise, service capabilities, and business reliability to new customers.",
+    color: "from-sky-500/30 to-transparent",
+    offset: 0,
+    image: "/universal.png",
+    alt: "Universal Engineering Works project preview",
+    tech: "Next.js, Tailwind CSS, Responsive UI",
+    timeline: "4 Weeks",
+    impact: "Improved service trust and lead visibility",
+    link: "https://universalengineeringworks.com/"
+  },
+  {
     slug: "garage-web",
     title: "Garage Web",
     category: "Garage Web",

@@ -24,7 +24,5 @@ declare module "lucide-react" {
   export const Search: LucideIcon;
   export const ShieldCheck: LucideIcon;
   export const Smartphone: LucideIcon;
-  export const Sun: LucideIcon;
-  export const Moon: LucideIcon;
   export const X: LucideIcon;
 }

@@ -50,19 +50,19 @@
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 text-left shadow-[0_18px_45px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-cyan-300/40">
+            <div className="site-card rounded-[28px] p-6 text-left shadow-[0_18px_45px_rgba(15,23,42,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">Responsive UI</p>
               <p className="mt-4 text-base leading-relaxed text-white/80">
                 Interfaces designed to adapt seamlessly across mobile, tablet, and desktop with modern accessibility and performance practices.
               </p>
             </div>
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 text-left shadow-[0_18px_45px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-cyan-300/40">
+            <div className="site-card rounded-[28px] p-6 text-left shadow-[0_18px_45px_rgba(15,23,42,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">Modern Engineering</p>
               <p className="mt-4 text-base leading-relaxed text-white/80">
                 Clean, maintainable code and reliable deploy pipelines that keep your product fast, secure, and future-proof.
               </p>
             </div>
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 text-left shadow-[0_18px_45px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:border-cyan-300/40">
+            <div className="site-card rounded-[28px] p-6 text-left shadow-[0_18px_45px_rgba(15,23,42,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">Growth Focus</p>
               <p className="mt-4 text-base leading-relaxed text-white/80">
                 We build products with measurable business impact, from conversion-driven design to intelligent data workflows.
@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <div className="mt-16 rounded-[26px] border-2 border-cyan-400/70 bg-gradient-to-b from-[#161d33] to-[#121a30] p-7 shadow-[0_0_0_1px_rgba(34,211,238,0.15),0_0_35px_rgba(34,211,238,0.1)]">
+          <div className="site-card mt-16 rounded-[26px] p-7 shadow-[0_0_0_1px_rgba(34,211,238,0.15),0_0_35px_rgba(34,211,238,0.1)]">
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
               {stats.map((item) => {
                 return (
@@ -93,7 +93,7 @@
             </div>
           </div>
 
-          <div className="mt-16 rounded-3xl border border-cyan-400/20 bg-[#09162a]/80 p-6 sm:p-8 md:p-10">
+          <div className="site-card mt-16 rounded-3xl p-6 sm:p-8 md:p-10">
             <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
               <div>
                 <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
@@ -115,7 +115,7 @@
                 </p>
               </div>
               <div className="space-y-4">
-                <div className="relative rounded-[28px] border border-cyan-300/40 bg-white/5 p-3">
+                <div className="site-card relative rounded-[28px] p-3">
                   <Image
                     src={imagePaths.vision}
                     alt="Vision to impact"
@@ -141,7 +141,7 @@
       <div className="grid gap-4 md:gap-5 lg:gap-4 grid-cols-1 lg:grid-cols-[1fr_0.95fr]">
         
         {/* Main Card - Engineering */}
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-cyan-300/30 bg-[#061327] shadow-[0_12px_28px_rgba(0,0,0,0.45)] sm:shadow-[0_16px_38px_rgba(0,0,0,0.5)]">
+        <div className="site-card relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_28px_rgba(0,0,0,0.45)] sm:shadow-[0_16px_38px_rgba(0,0,0,0.5)]">
           {/* Image Section */}
           <div className="flex h-48 sm:h-64 lg:h-74 items-center justify-center bg-gradient-to-br from-[#5e73d7] via-[#4f87d1] to-[#35bfd5]">
             <Image
@@ -156,7 +156,7 @@
           </div>
  
           {/* Text Section */}
-          <div className="border-t border-cyan-300/20 bg-[#050f1e] p-3 sm:p-4 lg:p-4">
+          <div className="border-t border-white/10 bg-white/[0.02] p-3 sm:p-4 lg:p-4 backdrop-blur-md">
             <p className="text-xl sm:text-2xl font-bold text-white leading-tight">
               Best-in-Class Engineering
             </p>
@@ -174,7 +174,7 @@
         <div className="space-y-4 md:space-y-5">
           
           {/* Card 2 - Innovation */}
-          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-cyan-300/30 bg-[#061327] shadow-[0_12px_28px_rgba(0,0,0,0.45)]">
+          <div className="site-card relative overflow-hidden rounded-xl sm:rounded-2xl shadow-[0_12px_28px_rgba(0,0,0,0.45)]">
             {/* Grid layout: stacked on mobile, side-by-side on tablet+ */}
             <div className="grid grid-cols-1 sm:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr] min-h-auto sm:min-h-[106px] gap-0">
               {/* Image Container */}
@@ -191,7 +191,7 @@
               </div>
  
               {/* Text Container */}
-              <div className="bg-[#050f1e] p-3 sm:p-3 lg:p-4 flex flex-col justify-center">
+              <div className="bg-white/[0.02] p-3 sm:p-3 lg:p-4 flex flex-col justify-center backdrop-blur-md">
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-white leading-tight">
                   Innovation with Purpose
                 </p>
@@ -207,7 +207,7 @@
           </div>
  
           {/* Card 3 - Iteration */}
-          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-cyan-300/30 bg-[#061327] shadow-[0_12px_28px_rgba(0,0,0,0.45)]">
+          <div className="site-card relative overflow-hidden rounded-xl sm:rounded-2xl shadow-[0_12px_28px_rgba(0,0,0,0.45)]">
             {/* Grid layout: stacked on mobile, side-by-side on tablet+ */}
             <div className="grid grid-cols-1 sm:grid-cols-[240px_1fr] lg:grid-cols-[300px_1fr] min-h-auto sm:min-h-[106px] gap-0">
               {/* Image Container */}
@@ -224,7 +224,7 @@
               </div>
  
               {/* Text Container */}
-              <div className="bg-[#050f1e] p-3 sm:p-3 lg:p-4 flex flex-col justify-center">
+              <div className="bg-white/[0.02] p-3 sm:p-3 lg:p-4 flex flex-col justify-center backdrop-blur-md">
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-white leading-tight">
                   Iteration, Always
                 </p>
@@ -248,9 +248,7 @@
       <CTA />
 
       <div className="container mx-auto mb-24 max-w-7xl px-6">
-        <div className="rounded-2xl border border-white/10 bg-[#0b0e14]">
-          <HomeReviews />
-        </div>
+        <HomeReviews />
       </div>
     </main>
   );
